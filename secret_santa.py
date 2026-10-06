@@ -18,9 +18,7 @@ class Participant:
 
 
 def load_participants(path: Path) -> list[Participant]:
-    """
-    Load and validate Secret Santa participants from a CSV file.
-    """
+ 
 
     participants: list[Participant] = []
     seen_emails: set[str] = set()
@@ -105,11 +103,7 @@ def load_participants(path: Path) -> list[Participant]:
 def draw_assignments(
     participants: list[Participant]
 ) -> list[tuple[Participant, Participant]]:
-    """
-    Randomly assign each participant exactly one recipient.
-
-    Nobody can receive themselves.
-    """
+   
 
     if len(participants) < 2:
         raise ValueError(
@@ -120,12 +114,7 @@ def draw_assignments(
 
     recipients = participants.copy()
 
-    # Sattolo's algorithm creates one random cycle.
-    #
-    # This guarantees:
-    # - Nobody receives themselves.
-    # - Every participant is selected exactly once.
-    # - No repeated shuffle/retry loop is necessary.
+    
 
     for i in range(len(recipients) - 1, 0, -1):
         j = rng.randrange(i)
@@ -143,9 +132,7 @@ def create_message(
     recipient: Participant,
     sender: str
 ) -> EmailMessage:
-    """
-    Create one participant's Secret Santa email.
-    """
+    
 
     message = EmailMessage()
 
@@ -168,11 +155,7 @@ def create_message(
 def send_assignments(
     assignments: list[tuple[Participant, Participant]]
 ) -> None:
-    """
-    Send all Secret Santa assignments through SMTP.
-
-    Assignment information is never printed.
-    """
+    
 
     host = os.environ.get("SMTP_HOST")
     username = os.environ.get("SMTP_USER")
@@ -227,17 +210,12 @@ def send_assignments(
 
             smtp.send_message(message)
 
-            # Important:
-            # Do NOT print recipient.name here.
 
             print(f"✓ Email sent to {giver.name}")
 
 
 def confirm_draw(participants: list[Participant]) -> bool:
-    """
-    Ask the organizer for confirmation before performing
-    the irreversible Secret Santa drawing.
-    """
+    
 
     print()
     print("Secret Santa participants:")
