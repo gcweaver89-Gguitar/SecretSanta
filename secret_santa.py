@@ -136,7 +136,7 @@ def create_message(
 
     message = EmailMessage()
 
-    message["Subject"] = "🎄 Your Secret Santa Assignment"
+    message["Subject"] = "🎄 Your Secret Santa Assignment for Dads"
     message["From"] = sender
     message["To"] = giver.email
 
@@ -146,7 +146,7 @@ def create_message(
         "Your Secret Santa recipient is:\n\n"
         f"🎁 {recipient.name} 🎁\n\n"
         "Keep their name secret!\n\n"
-        "Merry Christmas! 🎄\n"
+        "Merry Christmas nerds! 🎄\n"
     )
 
     return message
